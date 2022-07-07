@@ -1,0 +1,26 @@
+{
+  "name": "pointertesting",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "minimist": "^1.2.6",
+    "nodemon": "^2.0.19",
+    "terminal-kit": "^2.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matthew-fournier/pointer-testing.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matthew-fournier/pointer-testing/issues"
+  },
+  "homepage": "https://github.com/matthew-fournier/pointer-testing#readme"
+}
