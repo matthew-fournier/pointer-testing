@@ -1,6 +1,6 @@
 import scriptTitle from '../helpers/scriptTitle'
 
-const fromPR = (array) => {
+const originalFunction = (array) => {
   const selectedItems = array.reduce((pres, cur) => {
     if (cur.title === 'socks') {
       return pres
@@ -16,7 +16,7 @@ const fromPR = (array) => {
   return selectedItems
 }
 
-const fromUpdated = (array) => {
+const updatedFunction = (array) => {
   return array
     .filter((item) => item.title !== 'socks')
     .map((item) => {
@@ -37,11 +37,16 @@ const test1 = () => {
     { title: 'shoes', id: 12323 }
   ]
 
-  console.log('From PR:')
-  console.log(fromPR(exampleArray))
+  console.log('Original Response:')
+  console.log(originalFunction(exampleArray))
 
   console.log('Updated Example:')
-  console.log(fromUpdated(exampleArray))
+  console.log(updatedFunction(exampleArray))
 }
 
 export default test1
+
+/*
+  NOTE:
+  This is an example scenario based on what was found in a pr.
+*/
