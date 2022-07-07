@@ -1,14 +1,14 @@
-const term = require( 'terminal-kit' ).terminal
+import { terminal } from 'terminal-kit'
 
 const scriptTitle = (text) => {
   const trimText = text
-    .split("\n")
-    .map(s => s.trim())
+    .split('\n')
+    .map((s) => s.trim())
     .filter(Boolean)
-    .join("\n");
+    .join('\n')
 
-  term.yellow(`\n${trimText}\n\n`)
+  terminal.yellow(`\n${trimText}\n\n`)
   return true
 }
 
-module.exports = scriptTitle
+export default scriptTitle

@@ -1,13 +1,15 @@
-const scriptTitle = require("../helpers/scriptTitle")
+import scriptTitle from '../helpers/scriptTitle'
 
 const fromPR = (array) => {
   const selectedItems = array.reduce((pres, cur) => {
-    if (cur.title === 'socks') { return pres }
-    pres.push(({
+    if (cur.title === 'socks') {
+      return pres
+    }
+    pres.push({
       itemID: cur.id,
       quantity: 1,
       title: cur.title
-    }))
+    })
     return pres
   }, [])
 
@@ -16,8 +18,8 @@ const fromPR = (array) => {
 
 const fromUpdated = (array) => {
   return array
-    .filter(item => item.title !== 'socks')
-    .map(item => {
+    .filter((item) => item.title !== 'socks')
+    .map((item) => {
       return {
         itemID: item.id,
         quantity: 1,
@@ -32,7 +34,7 @@ const test1 = () => {
   const exampleArray = [
     { title: 'socks', id: 123 },
     { title: 'shorts', id: 343 },
-    { title: 'shoes', id: 12323 },
+    { title: 'shoes', id: 12323 }
   ]
 
   console.log('From PR:')
@@ -42,4 +44,4 @@ const test1 = () => {
   console.log(fromUpdated(exampleArray))
 }
 
-module.exports = test1
+export default test1
