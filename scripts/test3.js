@@ -1,75 +1,84 @@
 import scriptTitle from '../helpers/scriptTitle'
 
-const originalFunction = (conditionalValues) => {
-  const itemsToAdd = []
+const originalFunction = (mainArray) => {
+  /* The Below will cause an error: TypeError: Cannot read property 'subValue' of null
+    return mainArray.map((obj) => obj.primeValue.subValue)
+  */
 
-  if (conditionalValues.a) {
-    itemsToAdd.push({
-      id: conditionalValues.a,
-      name: 'Item A',
-      quantity: 2
+  // To fix it we can apply an if undefined or null check
+  return mainArray
+    .map((obj) => {
+      if (
+        typeof obj.primeValue === 'undefined' ||
+        !obj.primeValue ||
+        typeof obj.primeValue.subFunction !== 'function' ||
+        !obj.primeValue.subFunction
+      ) { return null }
+
+      return obj.primeValue.subFunction()
     })
-  }
-
-  if (conditionalValues.b) {
-    itemsToAdd.push({
-      id: conditionalValues.b,
-      name: 'Item B',
-      quantity: 1
-    })
-  }
-
-  if (conditionalValues.c) {
-    itemsToAdd.push({
-      id: conditionalValues.c,
-      name: 'Item C',
-      quantity: 2
-    })
-  }
-
-  return itemsToAdd
+    .filter((item) => item !== null)
 }
 
-const updatedFunction = (conditionalValues) => {
-  return [
-    {
-      id: conditionalValues.a,
-      name: 'Item A',
-      quantity: 2
-    },
-    {
-      id: conditionalValues.b,
-      name: 'Item B',
-      quantity: 1
-    },
-    {
-      id: conditionalValues.c,
-      name: 'Item C',
-      quantity: 2
-    }
-  ].filter(item => item.id !== null)
+const updatedFunction = (mainArray) => {
+  /*
+     By adding '?' after primeValue, obj.primeValue?.subFunction will return
+     'undefined' instead of throwing an error. This allows us to use a
+     typeof === 'function' check
+  */
+
+  return mainArray
+    .filter((obj) => typeof obj.primeValue?.subFunction === 'function')
+    .map((obj) => obj.primeValue?.subFunction())
 }
 
 const test3 = () => {
-  scriptTitle('Creating an array of conditional objects')
+  scriptTitle('Use "Optional Chaining" to create a list of values from an array')
 
-  const conditionalValues = {
-    a: 1421,
-    b: 214,
-    c: null
-  }
+  const mainArray = [
+    {
+      primeValue: null
+    },
+    {
+      primeValue: {
+        subFunction: () => {
+          return 'Only Valid Object'
+        }
+      }
+    },
+    {
+      primeValue: {
+        subFunction: 342
+      }
+    },
+    {
+      primeValue: {
+        subFunction: null
+      }
+    },
+    {
+      primeValue: {
+        wrongFunction: () => {
+          return 'Any String'
+        }
+      }
+    },
+    {
+      notPrimeValue: 'Any String'
+    }
+  ]
 
   console.log('Original Response:')
-  console.log(originalFunction(conditionalValues))
+  console.log(originalFunction(mainArray))
 
   console.log('Updated Response:')
-  console.log(updatedFunction(conditionalValues))
+  console.log(updatedFunction(mainArray))
 }
 
 export default test3
 
 /*
   NOTE:
-  This is an example scenario based on what was found in a pr.
-  conditionalValues was set up to replication condiditional values that can come from getArrtibute()
+  Prevent error when cheking a property of undefined of null
+  Our goal is to the valid values of each mainArray.primeValue.subFunction
 */
