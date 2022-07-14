@@ -1,5 +1,6 @@
 import minimist from 'minimist'
 import { terminal } from 'terminal-kit'
+import fizzbuzz from './scripts/fizzbuzz'
 import test1 from './scripts/test1'
 import test2 from './scripts/test2'
 import test3 from './scripts/test3'
@@ -11,7 +12,8 @@ import test3 from './scripts/test3'
   const validScripts = [
     test1,
     test2,
-    test3
+    test3,
+    fizzbuzz
   ]
 
   const scriptToRun = validScripts.find(
