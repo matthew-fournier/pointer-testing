@@ -1,19 +1,23 @@
 import minimist from 'minimist'
 import { terminal } from 'terminal-kit'
 import fizzbuzz from './scripts/fizzbuzz'
-import test1 from './scripts/test1'
-import test2 from './scripts/test2'
-import test3 from './scripts/test3'
+import reduceVsMap from './scripts/reduceVsMap'
+import arrayPushVsFilter from './scripts/arrayPushVsFilter'
+import optionalChaining from './scripts/optionalChaining'
+import waitForVariable from './scripts/waitForVariable'
+import simpleFetch from './scripts/simpleFetch'
 
 (() => {
   const args = minimist(process.argv.slice(2))
   const selectedScript = Object.keys(args)[1]
 
   const validScripts = [
-    test1,
-    test2,
-    test3,
-    fizzbuzz
+    reduceVsMap,
+    arrayPushVsFilter,
+    optionalChaining,
+    fizzbuzz,
+    waitForVariable,
+    simpleFetch
   ]
 
   const scriptToRun = validScripts.find(

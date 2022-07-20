@@ -32,7 +32,7 @@ const updatedFunction = (mainArray) => {
     .map((obj) => obj.primeValue?.subFunction())
 }
 
-const test3 = () => {
+const optionalChaining = () => {
   scriptTitle('Use "Optional Chaining" to create a list of values from an array')
 
   const mainArray = [
@@ -75,7 +75,7 @@ const test3 = () => {
   console.log(updatedFunction(mainArray))
 }
 
-export default test3
+export default optionalChaining
 
 /*
   NOTE:

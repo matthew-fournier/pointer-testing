@@ -28,7 +28,7 @@ const updatedFunction = (array) => {
     })
 }
 
-const test1 = () => {
+const reduceVsMap = () => {
   scriptTitle('Creating an array')
 
   const exampleArray = [
@@ -44,7 +44,7 @@ const test1 = () => {
   console.log(updatedFunction(exampleArray))
 }
 
-export default test1
+export default reduceVsMap
 
 /*
   NOTE:

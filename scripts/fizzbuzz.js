@@ -24,12 +24,7 @@ const originalFunction = () => {
 
 const updatedFunction = () => {
   return [...Array(51).keys()].slice(1)
-    .map(i =>
-      ((i % 3 === 0 && i % 5 === 0) && 'FizzBuzz') ||
-      ((i % 3 === 0) && 'Fizz') ||
-      ((i % 5 === 0) && 'Buzz') ||
-      i
-    )
+    .map(i => (i % 3 === 0 ? 'Fizz' : '') + (i % 5 === 0 ? 'Buzz' : '') || i)
     .join(', ')
 }
 

@@ -50,7 +50,7 @@ const updatedFunction = (conditionalValues) => {
   ].filter(item => item.id !== null)
 }
 
-const test2 = () => {
+const arrayPushVsFilter = () => {
   scriptTitle('Creating an array of conditional objects')
 
   const conditionalValues = {
@@ -66,7 +66,7 @@ const test2 = () => {
   console.log(updatedFunction(conditionalValues))
 }
 
-export default test2
+export default arrayPushVsFilter
 
 /*
   NOTE:
