@@ -4,7 +4,6 @@ import fizzbuzz from './scripts/fizzbuzz'
 import reduceVsMap from './scripts/reduceVsMap'
 import arrayPushVsFilter from './scripts/arrayPushVsFilter'
 import optionalChaining from './scripts/optionalChaining'
-import waitForVariable from './scripts/waitForVariable'
 import simpleFetch from './scripts/simpleFetch'
 import zipCodes from './scripts/zipCodes'
 
@@ -17,7 +16,6 @@ import zipCodes from './scripts/zipCodes'
     arrayPushVsFilter,
     optionalChaining,
     fizzbuzz,
-    waitForVariable,
     simpleFetch,
     zipCodes
   ]
