@@ -6,6 +6,7 @@ import arrayPushVsFilter from './scripts/arrayPushVsFilter'
 import optionalChaining from './scripts/optionalChaining'
 import waitForVariable from './scripts/waitForVariable'
 import simpleFetch from './scripts/simpleFetch'
+import zipCodes from './scripts/zipCodes'
 
 (() => {
   const args = minimist(process.argv.slice(2))
@@ -17,7 +18,8 @@ import simpleFetch from './scripts/simpleFetch'
     optionalChaining,
     fizzbuzz,
     waitForVariable,
-    simpleFetch
+    simpleFetch,
+    zipCodes
   ]
 
   const scriptToRun = validScripts.find(
