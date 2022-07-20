@@ -12,11 +12,11 @@ const getZips = async (zipToLookup) => {
           return {
             stateCode: state[0],
             stateName: state[1].name,
-            zips: state[1].cities[city],
-            city
+            zipCodes: state[1].cities[city],
+            cityName: city
           }
         })
-      ).find((zipInfo) => zipInfo.zips.includes(zipToLookup))
+      ).find((zipInfo) => zipInfo.zipCodes.includes(zipToLookup))
   } catch (err) {
     console.log(err.message)
   }
