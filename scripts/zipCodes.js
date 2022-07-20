@@ -16,14 +16,14 @@ const getZips = async (zipToLookup) => {
             cityName: city
           }
         })
-      ).find((zipInfo) => zipInfo.zipCodes.includes(zipToLookup))
+      ).find((zipData) => zipData.zipCodes.includes(zipToLookup))
   } catch (err) {
     console.log(err.message)
   }
 }
 
 const zipCodes = async () => {
-  scriptTitle('Exercise to minimize the code needed to complete the FizzBuzz challenge')
+  scriptTitle('Get location info based on a zipcode')
 
   const zipInfo = await getZips(36610)
   console.log(zipInfo)
