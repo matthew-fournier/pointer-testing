@@ -11,7 +11,10 @@ const getStringAtPosition = (position, time, callback) => {
     ) { throw new Error('getStringAtPosition requires position, time and a callback') }
 
     const stringAtPosition = stringArray[position]
-    return callback(position, stringAtPosition, time)
+
+    setTimeout(() => {
+      return callback(position, stringAtPosition, time)
+    }, time)
   } catch (err) {
     console.log(err.message)
     return null
@@ -19,9 +22,7 @@ const getStringAtPosition = (position, time, callback) => {
 }
 
 const afterWeGetString = (position, string, time) => {
-  return setTimeout(() => {
-    console.log(`String at position ${position}: "${string}" - ${time}ms delay`)
-  }, time)
+  console.log(`String at position ${position}: "${string}" - ${time}ms delay`)
 }
 
 const callbacks = () => {
@@ -31,16 +32,12 @@ const callbacks = () => {
   getStringAtPosition(3, 0, afterWeGetString)
 
   getStringAtPosition(0, 900, (position, string, time) => {
-    setTimeout(() => {
-      console.log(`\nString at position ${position}: "${string}" - ${time}ms delay`)
+    console.log(`\nString at position ${position}: "${string}" - ${time}ms delay`)
 
-      getStringAtPosition(position + 1, 0, (position2, string2, time2) => {
-        console.log(`The next string at position ${position}: "${string}" - ${time}ms delay`)
-      })
-    }, time)
+    getStringAtPosition(position + 1, 0, (position2, string2, time2) => {
+      console.log(`The next string at position ${position2}: "${string2}" - ${time2}ms delay`)
+    })
   })
-
-  // myFunction('This Should Appear First', 500, myCallbackFunction)
 }
 
 export default callbacks

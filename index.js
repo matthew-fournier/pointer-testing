@@ -8,6 +8,7 @@ import simpleFetch from './scripts/simpleFetch'
 import zipCodes from './scripts/zipCodes'
 import callbacks from './scripts/callbacks'
 import callbacksToPromise from './scripts/callbacksToPromise'
+import promiseToAwait from './scripts/promiseToAwait'
 
 (() => {
   const args = minimist(process.argv.slice(2))
@@ -21,7 +22,8 @@ import callbacksToPromise from './scripts/callbacksToPromise'
     simpleFetch,
     zipCodes,
     callbacks,
-    callbacksToPromise
+    callbacksToPromise,
+    promiseToAwait
   ]
 
   const scriptToRun = validScripts.find(
