@@ -28,7 +28,7 @@ const updatedFunction = () => {
     .join(', ')
 }
 
-const fizzbuzz = () => {
+const exerciseFizzbuzz = () => {
   scriptTitle('Exercise to minimize the code needed to complete the FizzBuzz challenge')
 
   console.log('Original Response:')
@@ -38,7 +38,7 @@ const fizzbuzz = () => {
   console.log(updatedFunction())
 }
 
-export default fizzbuzz
+export default exerciseFizzbuzz
 
 /*
   NOTE:

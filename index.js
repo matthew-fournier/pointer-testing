@@ -1,6 +1,6 @@
 import minimist from 'minimist'
 import { terminal } from 'terminal-kit'
-import fizzbuzz from './scripts/fizzbuzz'
+import exerciseFizzbuzz from './scripts/exerciseFizzbuzz'
 import reduceVsMap from './scripts/reduceVsMap'
 import arrayPushVsFilter from './scripts/arrayPushVsFilter'
 import optionalChaining from './scripts/optionalChaining'
@@ -9,6 +9,7 @@ import zipCodes from './scripts/zipCodes'
 import callbacks from './scripts/callbacks'
 import callbacksToPromise from './scripts/callbacksToPromise'
 import promiseToAwait from './scripts/promiseToAwait'
+import classes from './scripts/classes'
 
 (() => {
   const args = minimist(process.argv.slice(2))
@@ -18,12 +19,13 @@ import promiseToAwait from './scripts/promiseToAwait'
     reduceVsMap,
     arrayPushVsFilter,
     optionalChaining,
-    fizzbuzz,
+    exerciseFizzbuzz,
     simpleFetch,
     zipCodes,
     callbacks,
     callbacksToPromise,
-    promiseToAwait
+    promiseToAwait,
+    classes
   ]
 
   const scriptToRun = validScripts.find(
