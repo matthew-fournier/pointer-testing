@@ -10,6 +10,7 @@ import callbacks from './scripts/callbacks'
 import callbacksToPromise from './scripts/callbacksToPromise'
 import promiseToAwait from './scripts/promiseToAwait'
 import classes from './scripts/classes'
+import exerciseWaitForVariable from './scripts/exerciseWaitForVariable'
 
 (() => {
   const args = minimist(process.argv.slice(2))
@@ -25,7 +26,7 @@ import classes from './scripts/classes'
     callbacks,
     callbacksToPromise,
     promiseToAwait,
-    classes
+    classes, exerciseWaitForVariable
   ]
 
   const scriptToRun = validScripts.find(
