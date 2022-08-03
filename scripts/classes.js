@@ -44,6 +44,7 @@ const basicGetSet = () => {
   console.log(`agent's codename is < ${agent.codename} >`)
 
   console.log('\nSet agent name to "Bob Belcher" without Setter')
+  // This is bad practice and is only done for the purpose of the demo
   agent._codename = 'Bob Belcher'
   console.log(`agent's codename is < ${agent.codename} >`)
 
