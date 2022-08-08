@@ -1,44 +1,21 @@
 import minimist from 'minimist'
+import * as fs from 'fs'
 import { terminal } from 'terminal-kit'
-import exerciseFizzbuzz from './scripts/exerciseFizzbuzz'
-import reduceVsMap from './scripts/reduceVsMap'
-import arrayPushVsFilter from './scripts/arrayPushVsFilter'
-import optionalChaining from './scripts/optionalChaining'
-import simpleFetch from './scripts/simpleFetch'
-import zipCodes from './scripts/zipCodes'
-import callbacks from './scripts/callbacks'
-import callbacksToPromise from './scripts/callbacksToPromise'
-import promiseToAwait from './scripts/promiseToAwait'
-import classes from './scripts/classes'
-import exerciseWaitForVariable from './scripts/exerciseWaitForVariable'
 
-(() => {
+(async () => {
   const args = minimist(process.argv.slice(2))
   const selectedScript = Object.keys(args)[1]
 
-  const validScripts = [
-    reduceVsMap,
-    arrayPushVsFilter,
-    optionalChaining,
-    exerciseFizzbuzz,
-    simpleFetch,
-    zipCodes,
-    callbacks,
-    callbacksToPromise,
-    promiseToAwait,
-    classes, exerciseWaitForVariable
-  ]
+  const validScripts = fs.readdirSync('./scripts')
+    .map(scriptname => scriptname.split('.')[0])
 
-  const scriptToRun = validScripts.find(
-    (script) => script.name === selectedScript
-  )
-
-  if (typeof scriptToRun === 'undefined') {
-    terminal
+  if (!validScripts.includes(selectedScript)) {
+    return terminal
       .red('No script found that matches: ')
       .blue(`<${selectedScript}> \n\n`)
-    return
   }
+
+  const { default: scriptToRun } = await import(`./scripts/${selectedScript}.js`)
 
   scriptToRun()
 })()

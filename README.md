@@ -1,5 +1,5 @@
 1. Run 'yarn install'
 2. Run 'yarn start --[script_name]'
 
-- script_name will be a script from validScripts in index.js
-- These scripts match the names of the files in /scripts
+script_name will be a filename from /scripts
+Ex: Run 'yarn start --callbacks' to run /scripts/callbacks.js
