@@ -15,37 +15,37 @@ const paginationInfo = {
     if (!pageNumber) { throw Error('<pageNumber> is missing') }
 
     return {
-      names: this.getNames(pageNumber),
-      hasNextPage: this.getNames(pageNumber + 1).length > 0,
-      hasPrevPage: this.getNames(pageNumber - 1).length > 0
+      names: this.getNamesOnPage(pageNumber),
+      hasNextPage: this.getNamesOnPage(pageNumber + 1).length > 0,
+      hasPrevPage: this.getNamesOnPage(pageNumber - 1).length > 0
     }
   },
-  getNames (pageNumber) {
+  getNamesOnPage (pageNumber) {
     const startSpliceIndex = (this.namesList.length / (this.namesList.length / this.pageSize)) * (pageNumber - 1)
     return this.namesList.slice(startSpliceIndex, startSpliceIndex + this.pageSize)
+  },
+  checkNameCount (numberOfNames) {
+    return console.log(
+      numberOfNames === this.namesCount
+        ? `Correct, there are ${numberOfNames} names`
+        : `Incorrect, there are ${this.namesCount} names but only ${numberOfNames} have been found`
+    )
+  },
+  get namesCount () {
+    return this.namesList.length
   }
 }
 
-const loopThroughPages = async () => {
-  const resultArray = []
-  let index = 1
-
-  while (index === 1 || resultArray[resultArray.length - 1].hasNextPage) {
-    const currentPage = paginationInfo.getPage(index)
-    resultArray.push(currentPage)
-    index++
-    console.log(currentPage)
-    await new Promise((resolve) => {
-      setTimeout(() => resolve(true), 500)
-    })
-  }
-
-  console.log(`There are ${resultArray.flatMap(page => page.names).length} names`)
-}
-
+/*
+  To Do:
+  Don't modify the paginationInfo object
+  Iterate through all pages using paginationInfo.getPage(pageNumber) pageNumber is 1-Indexed
+  On each iteration console log the result of paginationInfo.getPage(pageNumber)
+  Once all pages have been looped through, check that the returned number of names matches using paginationInfo.checkNameCount(numberOfNames)
+*/
 const rateLimit = () => {
   try {
-    loopThroughPages()
+    // Code Goes Here
   } catch (err) {
     terminal.red(`${err}\n\n`)
   }
@@ -54,8 +54,107 @@ const rateLimit = () => {
 export default rateLimit
 
 /*
-  NOTE:
-  Don't modify the paginationInfo function
-  Loop though all the pages
-  Console .log total number of names
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+..
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+const resultArray = []
+let index = 1
+
+while (index === 1 || resultArray[resultArray.length - 1].hasNextPage) {
+  const currentPage = paginationInfo.getPage(index)
+  resultArray.push(currentPage)
+  console.log(currentPage)
+  index++
+  await new Promise(resolve => setTimeout(() => resolve(true), 500))
+}
+
+paginationInfo.checkNameCount(resultArray.flatMap(page => page.names).length)
 */
