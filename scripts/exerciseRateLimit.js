@@ -12,7 +12,7 @@ const paginationInfo = {
     }
     this.lastCall = currentTime
 
-    if (!pageNumber) { throw Error('<pageNumber> is missing') }
+    if (!pageNumber) { throw Error(`<pageNumber> ${pageNumber} is not a valid value`) }
 
     return {
       names: this.getNamesOnPage(pageNumber),
@@ -43,7 +43,8 @@ const paginationInfo = {
   On each iteration console log the result of paginationInfo.getPage(pageNumber)
   Once all pages have been looped through, check that the returned number of names matches using paginationInfo.checkNameCount(numberOfNames)
 */
-const rateLimit = () => {
+
+const exerciseRateLimit = () => {
   try {
     // Code Goes Here
   } catch (err) {
@@ -51,7 +52,7 @@ const rateLimit = () => {
   }
 }
 
-export default rateLimit
+export default exerciseRateLimit
 
 /*
 .
@@ -110,29 +111,6 @@ export default rateLimit
 .
 .
 .
-..
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
 .
 .
 .
@@ -145,16 +123,41 @@ export default rateLimit
 .
 .
 
+.
+.
+.
+.
+----------------------------------------------------------------------------------
+Option 1:
+----------------------------------------------------------------------------------
 const resultArray = []
 let index = 1
 
-while (index === 1 || resultArray[resultArray.length - 1].hasNextPage) {
+do {
   const currentPage = paginationInfo.getPage(index)
   resultArray.push(currentPage)
   console.log(currentPage)
   index++
   await new Promise(resolve => setTimeout(() => resolve(true), 500))
-}
+} while (resultArray[resultArray.length - 1].hasNextPage)
 
 paginationInfo.checkNameCount(resultArray.flatMap(page => page.names).length)
+
+----------------------------------------------------------------------------------
+Option 2:
+----------------------------------------------------------------------------------
+const getAllPagesByPage = async (index, pagesData) => {
+  const currentPage = paginationInfo.getPage(index)
+  pagesData.push(currentPage)
+  console.log(currentPage)
+
+  await new Promise((resolve) => setTimeout(() => resolve(true), 500))
+
+  if (!currentPage.hasNextPage) { return pagesData }
+  return getAllPagesByPage(index + 1, pagesData)
+}
+------------------
+const allPagesData = await getAllPagesByPage(1, [])
+paginationInfo.checkNameCount(allPagesData.flatMap(page => page.names).length)
+
 */
