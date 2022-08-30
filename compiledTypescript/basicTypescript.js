@@ -27,7 +27,8 @@ const basicTypescript = () => __awaiter(void 0, void 0, void 0, function* () {
             {
                 title: 'Task1',
                 dueDate: new Date('September 22, 2022'),
-                status: 'In Progress'
+                status: myStatus,
+                tags: ['dev-only', 'quick-fix']
             }
         ];
         // The new pushed object must follow the DevTask Interface
@@ -36,11 +37,12 @@ const basicTypescript = () => __awaiter(void 0, void 0, void 0, function* () {
             dueDate: new Date('September 24, 2022'),
             status: 'Not Started'
         });
-        console.log(myTaskList, "d");
+        // Create a new new promise to wait for 100ms. Promise resolves a type booleon
+        yield new Promise((resolve) => setTimeout(() => resolve(true), 100));
+        console.log(myTaskList);
     }
     catch (err) {
         console.log(err);
     }
 });
 export default basicTypescript;
-//# sourceMappingURL=basicTypescript.js.map

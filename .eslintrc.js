@@ -1,3 +1,6 @@
 module.exports = {
-  extends: 'ts-standard'
+  extends: 'standard-with-typescript',
+  parserOptions: {
+    project: './tsconfig.json'
+  }
 }
