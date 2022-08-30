@@ -18,7 +18,7 @@ const basicBind = async () => {
 
     console.log(exampleObject.multipliyANumber(2))
     const referenceToObjectFunction = exampleObject.multipliyANumber
-    console.log(referenceToObjectFunction.bind(exampleObject)(3))
+    console.log(referenceToObjectFunction(3))
     console.log(referenceToObjectFunction.bind(exampleObjectTwo)(3))
   } catch (err) {
     terminal.red(`\n${err}\n`)

@@ -44,9 +44,22 @@ const paginationInfo = {
   Once all pages have been looped through, check that the returned number of names matches using paginationInfo.checkNameCount(numberOfNames)
 */
 
-const exerciseRateLimit = () => {
+const exerciseRateLimit = async () => {
   try {
     // Code Goes Here
+
+    const resultArray = []
+    let index = 1
+
+    do {
+      const currentPage = paginationInfo.getPage(index)
+      resultArray.push(currentPage)
+      console.log(currentPage)
+      index++
+      await new Promise(resolve => setTimeout(() => resolve(true), 500))
+    } while (resultArray[resultArray.length - 1].hasNextPage)
+
+    paginationInfo.checkNameCount(resultArray.flatMap(page => page.names).length)
   } catch (err) {
     terminal.red(`${err}\n\n`)
   }
