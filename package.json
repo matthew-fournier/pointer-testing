@@ -21,10 +21,13 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-standard": "^5.0.0",
     "nodemon": "^2.0.19",
+    "tsc-alias": "^1.7.0",
     "typescript": "^4.8.2"
   },
   "scripts": {
-    "start": "nodemon --exec babel-node index.js"
+    "start": "nodemon --exec 'yarn ts-build && yarn dev'",
+    "dev": "babel-node index.js",
+    "ts-build": "tsc-alias && tsc --build"
   },
   "repository": {
     "type": "git",

@@ -8,8 +8,8 @@ const onlyAcceptsNumbers = (passedNumber: number) => {
 
 const basicTypescript = () => {
   scriptTitle('Exercise to minimize the code needed to complete the FizzBuzz challenge')
-
-  onlyAcceptsNumbers('2')
+  console.log('eeef')
+  onlyAcceptsNumbers(2)
 
 }
 
