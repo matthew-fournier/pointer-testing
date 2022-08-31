@@ -8,7 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import scriptTitle from '../helpers/scriptTitle';
-// This function only accepts a numbers and a string. The return value will be of type string
+/**
+ * Example function that returns a string containing the passed values
+ * @param passedNumber : Type of number
+ * @param passedString : Type of string
+ * @returns : Type of string
+ */
 const onlyAcceptsNumberAndString = (passedNumber, passedString) => {
     return `My number is < ${passedNumber} > and my string is < "${passedString}" >`;
 };
