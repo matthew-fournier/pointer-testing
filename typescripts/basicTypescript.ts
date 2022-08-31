@@ -11,7 +11,12 @@ interface DevTask {
   tags?: string[]
 }
 
-// This function only accepts a numbers and a string. The return value will be of type string
+/**
+ * Example function that returns a string containing the passed values
+ * @param passedNumber : Type of number
+ * @param passedString : Type of string
+ * @returns : Type of string
+ */
 const onlyAcceptsNumberAndString = (passedNumber: number, passedString: string): string => {
   return `My number is < ${passedNumber} > and my string is < "${passedString}" >`
 }

@@ -11,11 +11,22 @@ import scriptTitle from '../helpers/scriptTitle'
   Go to the store and buy some more, 99 bottles of beer on the wall.
 */
 
+/**
+ * Gets value for "# bottles of beer"
+ * @param {number} index : Index of the bottles of beer
+ * @param {boolean} isStartOfSentence : Boolean on if the first letter needs to be capitalizeds
+ * @returns {string}: Example return -> 12 bottles of beer
+ */
 const howManyBeer = (index, isStartOfSentence) => {
   const adjustedIndex = index < 0 ? 99 : index
   return `${adjustedIndex > 0 ? adjustedIndex : `${isStartOfSentence ? 'N' : 'n'}o more`} bottle${adjustedIndex === 1 ? '' : 's'} of beer`
 }
 
+/**
+ * Take one down or go to the store
+ * @param {number} index
+ * @returns {string} : String based on index value
+ */
 const takeOrStore = (index) => {
   return index > 0 ? 'Take one down and pass it around' : 'Go to the store and buy some more'
 }
