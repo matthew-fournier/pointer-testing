@@ -11,9 +11,9 @@ interface ShopifyProduct {
   }>
 }
 
-const axiosExample = async (): Promise<void> => {
+const shopifyProduct = async (): Promise<void> => {
   try {
-    scriptTitle('Axios Example')
+    scriptTitle('Shopify Product Example')
 
     const axiosRes: AxiosResponse = await axios('https://dudeproducts.com/products/dude-wipes-48ct-dispenser-30pk-travel-home-away-combo.json')
     const productData: ShopifyProduct = axiosRes.data.product
@@ -25,4 +25,4 @@ const axiosExample = async (): Promise<void> => {
   }
 }
 
-export default axiosExample
+export default shopifyProduct
