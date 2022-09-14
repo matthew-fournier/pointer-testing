@@ -1,23 +1,27 @@
 import scriptTitle from '../helpers/scriptTitle'
 
 // Custom type for id. Ex: product-ABCD-0123456789
-type typeProductID = `product-${string}-${number}`
+type typeID = `${string}-${string}-${number}`
 
+// Interface for product info object
 interface typeProductInfo {
   title: string
   price: number
-  id: typeProductID
+  id: typeID
 }
 
+/**
+ * Product Class
+ */
 class Product {
   private _title: string
   private readonly _price: number
-  readonly id: typeProductID
+  readonly id: typeID
 
   constructor (title: string, price: number) {
     this._title = title
     this._price = price
-    this.id = this.generateID()
+    this.id = generateID('product')
   }
 
   get title (): string {
@@ -39,19 +43,20 @@ class Product {
       id: this.id
     }
   }
-
-  generateID (): typeProductID {
-    return `product-${rand4Char()}-${Date.now()}`
-  }
 }
 
+/**
+ * Collection Class
+ */
 class Collection {
   private readonly _title: string
   private readonly _products: Product[]
+  readonly id: typeID
 
   constructor (title, products: Product[]) {
     this._title = title
     this._products = products
+    this.id = generateID('collection')
   }
 
   get products (): typeProductInfo[] {
@@ -59,6 +64,10 @@ class Collection {
   }
 }
 
+/**
+ * Returns 4 random characters for ids
+ * @returns { string } : random 4 Characters
+ */
 const rand4Char = (): string => {
   const validCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   return [...Array(4).keys()]
@@ -72,7 +81,19 @@ const rand4Char = (): string => {
     .join('')
 }
 
-const basicTypescript = (): void => {
+/**
+ * Creates ID for product or collections classes
+ * @param prefix : Either 'product' or 'collection';
+ * @returns { typeID } : Id
+ */
+const generateID = (prefix: string): typeID => {
+  return `${prefix}-${rand4Char()}-${Date.now()}`
+}
+
+/**
+ * Example of Typescript Classes
+ */
+const classes = (): void => {
   scriptTitle('TypeScript Classes')
 
   const shirt: Product = new Product('Long Sleeve T-Shirt', 50.00)
@@ -89,4 +110,4 @@ const basicTypescript = (): void => {
   console.log('\nCollection Products:', collection.products)
 }
 
-export default basicTypescript
+export default classes
