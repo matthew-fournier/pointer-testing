@@ -38,8 +38,6 @@ const callbacks = () => {
       console.log(`The next string at position ${position2}: "${string2}" - ${time2}ms delay`)
     })
   })
-
-  console.log('dd')
 }
 
 export default callbacks
