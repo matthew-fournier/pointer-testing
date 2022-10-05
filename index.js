@@ -24,5 +24,6 @@ import { terminal } from 'terminal-kit'
 
   const { default: scriptToRun } = await import(`${selectedFilePath}/${selectedScriptName}.js`)
 
+  console.log(process.env.DB_NAME, 'fwe')
   scriptToRun()
 })()

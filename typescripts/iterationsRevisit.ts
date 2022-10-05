@@ -15,7 +15,37 @@ const products: InterSimpleProduct[] = [
 ]
 
 /**
- *
+ * Main Function to demo iterations
+ */
+const iterationsRevisit = (): void => {
+  scriptTitle('Iterations Revisit')
+  speedBreakdownExample('t-shirts')
+
+  // Products that are sold out
+  // const soldOutProducts: InterSimpleProduct[] = products.filter(product => product.inventory <= 0)
+  // console.log(soldOutProducts)
+
+  // A single product that has an invintory of 400
+  // const singleProductOf400: InterSimpleProduct | undefined = products.find(product => product.inventory === 400)
+  // console.log(singleProductOf400)
+
+  // Tops that cost over $50
+  // const topsOver50: InterSimpleProduct[] = products.filter(product => product.price > 50 && product.collections.includes('tops'))
+  // console.log(topsOver50)
+
+  // An array of all product names
+  // const productNames: string[] = products.map(product => product.title)
+  // console.log(productNames)
+
+  // Total stock of all products
+  // const totalStock: number = products.reduce((total, product) => total + product.inventory, 0)
+  // console.log(totalStock)
+}
+
+export default iterationsRevisit
+
+/**
+ * Search for products in a collection
  * @param collectionHandle { string } : A collection handle to search
  * @returns Array of products in collection
  */
@@ -48,33 +78,3 @@ const speedBreakdownExample = (collectionHandle: string): InterSimpleProduct[] =
 
   return collectionTShirt
 }
-
-/**
- * Main Function to demo iterations
- */
-const iterationsRevisit = (): void => {
-  scriptTitle('Iterations Revisit')
-  speedBreakdownExample('t-shirts')
-
-  // Products that are sold out
-  // const soldOutProducts: InterSimpleProduct[] =
-  // console.log(soldOutProducts)
-
-  // A single product that has an invintory of 400
-  // const singleProductOf400: InterSimpleProduct | undefined =
-  // console.log(singleProductOf400)
-
-  // Tops that cost over $50
-  // const topsOver50: InterSimpleProduct[] =
-  // console.log(topsOver50)
-
-  // An array of all product names
-  // const productNames: string[] =
-  // console.log(productNames)
-
-  // Total stock of all products
-  // const totalStock: number =
-  // console.log(totalStock)
-}
-
-export default iterationsRevisit
