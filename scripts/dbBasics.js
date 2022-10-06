@@ -8,7 +8,6 @@ const dbBasics = async () => {
 
     console.log(db.User, '***')
     const users = await db.User.findAll()
-    console.log(users)
 
     // await db.User.create({ firstName: 'Jane', lastName: 'Doe' })
     // console.log(users)
