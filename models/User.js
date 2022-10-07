@@ -1,6 +1,4 @@
-import { Sequelize, DataTypes } from 'sequelize'
-
-// const sequelize = new Sequelize('sqlite::memory:')
+import { DataTypes } from 'sequelize'
 
 const User = async (sequelize) => {
   const model = await sequelize.define('User', {
