@@ -1,4 +1,4 @@
 {
-  "watch": ["index.js", "scripts/*", "typescripts/*", "models/*"],
+  "watch": ["index.js", "scripts/*", "typescripts/*", "models/*", "server/*", "server/routes/*"],
   "ext": "js, ts"
 }
