@@ -12,11 +12,11 @@ MyClass.prototype.logValue = function () {
   console.log(this.someValue, this.someOtherValue)
 }
 
-const zipCodes = async () => {
+const prototype = () => {
   scriptTitle('Prototype')
 
   const myClass = new MyClass()
   myClass.logValue()
 }
 
-export default zipCodes
+export default prototype
