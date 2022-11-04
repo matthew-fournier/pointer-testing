@@ -4,6 +4,7 @@ import Router from 'koa-router'
 import rootRouter from './routes/root'
 import { terminal } from 'terminal-kit'
 import userRouter from './routes/users'
+import webhooksRouter from './routes/webhooks'
 
 const server = {}
 
@@ -26,7 +27,8 @@ const startServer = async () => {
 
   const routes = [
     rootRouter,
-    userRouter
+    userRouter,
+    webhooksRouter
   ]
   routes.forEach(route => {
     app.use(route.routes())
