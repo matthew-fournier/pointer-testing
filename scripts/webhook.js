@@ -48,9 +48,6 @@ const getConnectedWebhooks = async () => {
 const deleteAllWebhooks = async (connectedWebhooks) => {
   try {
     const webhookIds = connectedWebhooks.map(webhook => webhook.id)
-
-    console.log(webhookIds)
-
     await Promise.allSettled(webhookIds.map(async (id) => {
       await axios({
         method: 'delete',
