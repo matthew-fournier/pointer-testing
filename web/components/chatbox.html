@@ -1,0 +1,25 @@
+<chat-box>
+  <form data-intro-form>
+    <input type="text" placeholder="Username" />
+    <button type="submit">Enter</button>
+  </form>
+</chat-box>
+
+<script>
+  (() => {
+    const title = 'chat-box'
+    if (typeof window.customElements.get(title) !== 'undefined') { return }
+    window.customElements.define(title, class extends HTMLElement {
+      constructor() {
+        super()
+
+        console.log('Chatbox Init')
+        this.introForm()
+      }
+
+      introForm() {
+
+      }
+    })
+  })
+</script>
