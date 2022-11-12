@@ -3,7 +3,7 @@ import Router from 'koa-router'
 const router = new Router({ prefix: '/webhooks' })
 const webhooksRouter = router
 
-router.post('/themes/update', async (ctx) => {
+router.post('/themes-update', async (ctx) => {
   try {
     const webhookData = ctx.request.body
     console.log('THEME UPDATED')

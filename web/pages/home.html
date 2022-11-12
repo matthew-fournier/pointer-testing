@@ -1,0 +1,17 @@
+<home-page>
+  ho
+  [c.first]
+</home-page>
+
+<script>
+  (() => {
+    const title = 'home-page'
+    if (typeof window.customElements.get('home-page') !== 'undefined') { return }
+    window.customElements.define('home-page', class extends HTMLElement {
+      constructor() {
+        super()
+        console.log('d')
+      }
+    })
+  })
+</script>

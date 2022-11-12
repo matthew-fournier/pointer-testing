@@ -1,10 +1,12 @@
 import Koa from 'koa'
 import koaBody from 'koa-body'
 import Router from 'koa-router'
+import serve from 'koa-static'
 import rootRouter from './routes/root'
 import { terminal } from 'terminal-kit'
 import userRouter from './routes/users'
 import webhooksRouter from './routes/webhooks'
+import pagesRouter from './routes/pages'
 
 const server = {}
 
@@ -28,11 +30,14 @@ const startServer = async () => {
   const routes = [
     rootRouter,
     userRouter,
-    webhooksRouter
+    webhooksRouter,
+    pagesRouter
   ]
   routes.forEach(route => {
     app.use(route.routes())
   })
+
+  app.use(serve('./web/files'))
 
   const port = process.env.SERVER_PORT
   app.listen(port)
