@@ -1,15 +1,17 @@
 <chat-box class="chat-box">
   <form class="chat-box__intro" data-intro-form>
-    <input type="text" name="username" placeholder="Pick Your Username" />
+    <input type="text" name="username" placeholder="Pick Your Username" autocomplete="off" />
     <button type="submit">Enter</button>
   </form>
 
   <div class="chat-box__messages-holder hide" data-chat>
-    <div class="chat-box__messages" data-messages>
-
+    <div class="chat-box__messages-box" data-message-box>
+      <div class="chat-box__messages" data-messages>
+        <!-- Messaged Go Here  -->
+      </div>
     </div>
     <form data-message-form>
-      <input type="text" name="message" placeholder="Say something!" />
+      <input type="text" name="message" placeholder="Say something!" autocomplete="off" data-message-input />
       <button type="submit">Send</button>
     </form>
   </div>
@@ -31,7 +33,7 @@
         this.messageForm = this.querySelector('[data-message-form]')
         this.introForm = this.querySelector('[data-intro-form]')
         this.messagesBox = this.querySelector('[data-messages]')
-        this.username = 'f'
+        this.username = 'New User'
         this.userID = 0
 
         if (!this.messageForm || !this.introForm) { return }
@@ -54,19 +56,27 @@
           this.username = usernameValue
           this.introForm.classList.add('hide')
           this.querySelector('[data-chat]').classList.remove('hide')
+
+          socket.emit('messageSent', {
+            message: `${this.username} has entered the chat 👋`,
+            username: this.username,
+            userID: this.userID,
+            type: 'welcome'
+          })
         })
       }
 
       initMessageForm() {
         this.messageForm.addEventListener('submit', (event) => {
           event.preventDefault()
-          const messageInput = this.messageForm.querySelector('input')
+          const messageInput = this.messageForm.querySelector('[data-message-input]')
           if (!messageInput || messageInput.value.length === 0) { return }
 
           socket.emit('messageSent', {
             message: messageInput.value,
             username: this.username,
-            userID: this.userID
+            userID: this.userID,
+            type: 'basic'
           })
 
           messageInput.value = ''
@@ -75,16 +85,22 @@
 
       initMessagesBox () {
         socket.on('updateMessages', (messageData) => {
-        const newMessage =  document.createElement('message-bubble')
+          const newMessage =  document.createElement('message-bubble')
 
-        newMessage.innerHTML = `
-          <p>${messageData.message}</p>
-          <span>${messageData.username}</span>
-        `
+          newMessage.innerHTML = `
+            <p>${messageData.message}</p>
+            <span>${messageData.username}</span>
+          `
+          newMessage.classList.add('message')
+          newMessage.classList.add(`message--${messageData.type}`)
+          newMessage.classList.toggle('other-send', messageData.userID !== this.userID)
 
-        newMessage.classList.toggle('other-send', messageData.userID !== this.userID)
+          this.messagesBox.append(newMessage)
 
-        this.messagesBox.append(newMessage)
+          setTimeout(() => {
+            const messageBox = document.querySelector('[data-message-box]')
+            messageBox.scrollTo(0, messageBox.scrollHeight * 100)
+          }, 200)
         })
       }
     })
@@ -92,9 +108,8 @@
     window.customElements.define('message-bubble', class extends HTMLElement {
       constructor() {
         super()
-
         this.createTime = new Date().getTime()
-        this.visibleDuration = 60 * 1000 * 5 // 5 Min
+        this.visibleDuration = 60 * 1000 * 1 // 1 Min
         this.initBubble()
       }
 
