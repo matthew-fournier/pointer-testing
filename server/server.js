@@ -7,6 +7,8 @@ import { terminal } from 'terminal-kit'
 import userRouter from './routes/users'
 import webhooksRouter from './routes/webhooks'
 import pagesRouter from './routes/pages'
+import startSockets from './sockets'
+import { createServer } from 'http'
 
 const server = {}
 
@@ -39,8 +41,11 @@ const startServer = async () => {
 
   app.use(serve('./web/files'))
 
+  const httpServer = await createServer(app.callback())
+  await startSockets(httpServer)
+
   const port = process.env.SERVER_PORT
-  app.listen(port)
+  httpServer.listen(port)
 
   const serverURL = `http://localhost:${port}/`
   terminal.green(`\nServer is running on: ${serverURL}\n`)

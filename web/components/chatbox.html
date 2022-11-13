@@ -1,25 +1,117 @@
-<chat-box>
-  <form data-intro-form>
-    <input type="text" placeholder="Username" />
+<chat-box class="chat-box">
+  <form class="chat-box__intro" data-intro-form>
+    <input type="text" name="username" placeholder="Pick Your Username" />
     <button type="submit">Enter</button>
   </form>
+
+  <div class="chat-box__messages-holder hide" data-chat>
+    <div class="chat-box__messages" data-messages>
+
+    </div>
+    <form data-message-form>
+      <input type="text" name="message" placeholder="Say something!" />
+      <button type="submit">Send</button>
+    </form>
+  </div>
 </chat-box>
 
 <script>
-  (() => {
-    const title = 'chat-box'
-    if (typeof window.customElements.get(title) !== 'undefined') { return }
-    window.customElements.define(title, class extends HTMLElement {
+  ;(() => {
+    if (
+      typeof window.customElements.get('chat-box') !== 'undefined' ||
+      typeof window.customElements.get('message-bubble') !== 'undefined'
+    ) { return }
+
+    const socket = window.socket
+
+    window.customElements.define('chat-box', class extends HTMLElement {
       constructor() {
         super()
 
-        console.log('Chatbox Init')
-        this.introForm()
+        this.messageForm = this.querySelector('[data-message-form]')
+        this.introForm = this.querySelector('[data-intro-form]')
+        this.messagesBox = this.querySelector('[data-messages]')
+        this.username = 'f'
+        this.userID = 0
+
+        if (!this.messageForm || !this.introForm) { return }
+
+        socket.on('connectionReturn', (socketConnectionID) => {
+          this.userID = socketConnectionID
+          this.initIntroForm()
+          this.initMessageForm()
+          this.initMessagesBox()
+        })
       }
 
-      introForm() {
+      initIntroForm () {
+        this.introForm.addEventListener('submit', (event) => {
+          event.preventDefault()
+          const formData = new FormData(this.introForm)
+          const usernameValue = formData.get('username')
+          if (!usernameValue) { return }
 
+          this.username = usernameValue
+          this.introForm.classList.add('hide')
+          this.querySelector('[data-chat]').classList.remove('hide')
+        })
+      }
+
+      initMessageForm() {
+        this.messageForm.addEventListener('submit', (event) => {
+          event.preventDefault()
+          const messageInput = this.messageForm.querySelector('input')
+          if (!messageInput || messageInput.value.length === 0) { return }
+
+          socket.emit('messageSent', {
+            message: messageInput.value,
+            username: this.username,
+            userID: this.userID
+          })
+
+          messageInput.value = ''
+        })
+      }
+
+      initMessagesBox () {
+        socket.on('updateMessages', (messageData) => {
+        const newMessage =  document.createElement('message-bubble')
+
+        newMessage.innerHTML = `
+          <p>${messageData.message}</p>
+          <span>${messageData.username}</span>
+        `
+
+        newMessage.classList.toggle('other-send', messageData.userID !== this.userID)
+
+        this.messagesBox.append(newMessage)
+        })
       }
     })
-  })
+
+    window.customElements.define('message-bubble', class extends HTMLElement {
+      constructor() {
+        super()
+
+        this.createTime = new Date().getTime()
+        this.visibleDuration = 60 * 1000 * 5 // 5 Min
+        this.initBubble()
+      }
+
+      initBubble() {
+        const bubbleInterval = setInterval(() => {
+          const nowTime = new Date().getTime()
+          const endTime = this.createTime + this.visibleDuration
+
+          const opacityPercntage = (endTime - nowTime) / this.visibleDuration
+          this.style.opacity = `${opacityPercntage}`
+
+          if (nowTime < endTime) { return }
+
+          clearInterval(bubbleInterval)
+          this.remove()
+        }, 100)
+      }
+    })
+  })()
 </script>
