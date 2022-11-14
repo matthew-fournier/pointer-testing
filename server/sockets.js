@@ -50,7 +50,7 @@ const startRandSend = () => {
   }
 
   sendFact()
-  setInterval(() => sendFact(), 1000 * 30)
+  setInterval(() => sendFact(), 1000 * 60)
 }
 
 export default startSockets
