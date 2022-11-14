@@ -13,7 +13,6 @@ const startSockets = async (httpServer) => {
   })
 
   io.on('connection', (socket) => {
-    console.log(`-- New user connected with ID: ${socket.id}`)
     socket.emit('connectionReturn', socket.id)
 
     socket.on('messageSent', (messageData) => {
