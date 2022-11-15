@@ -21,9 +21,10 @@ const startSockets = async (httpServer) => {
     socket.on('messageSent', (messageData) => {
       io.emit('updateMessages', messageData)
 
-      if (!isMessageSent) {
-        startRandSend()
+      if (!isMessageSent && messageData.type === 'basic') {
         isMessageSent = true
+        setTimeout(() => randEnteredChat(), 1000 * 5)
+        setTimeout(() => startRandSend(), 1000 * 15)
       }
     })
   })
@@ -33,24 +34,36 @@ const startSockets = async (httpServer) => {
   return io
 }
 
+const randUserName = 'I am P0!NT3R'
+
+const randEnteredChat = () => {
+  io.emit('updateMessages', {
+    message: `${randUserName} has entered the chat 👋`,
+    username: randUserName,
+    userID: '--',
+    type: 'welcome'
+  })
+}
+
 const startRandSend = () => {
   let currentIndex = 0
 
-  const sendFact = () => {
+  const sendFact = (loopInterval) => {
     io.emit('updateMessages', {
       message: randomList[currentIndex],
-      username: 'I am C^l3b?',
+      username: randUserName,
       userID: '--',
       type: 'basic'
     })
 
-    currentIndex = currentIndex + 1 < randomList.length
-      ? currentIndex + 1
-      : 0
+    currentIndex++
+    if (currentIndex >= randomList.length) {
+      clearInterval(loopInterval)
+    }
   }
 
   sendFact()
-  setInterval(() => sendFact(), 1000 * 90)
+  const loopInterval = setInterval(() => sendFact(loopInterval), 1000 * 5)
 }
 
 export default startSockets
