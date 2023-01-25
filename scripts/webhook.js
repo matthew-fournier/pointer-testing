@@ -10,7 +10,7 @@ const {
   SHOP
 } = process.env
 
-const ngrokURL = 'https://d686-2607-fea8-c2df-f26b-5d76-79f3-23f2-7825.ngrok.io'
+const ngrokURL = process.env.NGROK_URL
 
 const webhookURL = `https://${API_KEY}:${API_PASSWORD}@${SHOP}/admin/api/2021-01/webhooks.json`
 
@@ -22,7 +22,7 @@ const connectWebHook = async (webhookTopic) => {
       data: {
         webhook: {
           topic: webhookTopic,
-          address: `${ngrokURL}/webhooks/${webhookTopic}`,
+          address: `${ngrokURL}/webhooks/${webhookTopic.replace('/', '-')}`,
           format: 'json'
         }
       }
@@ -63,7 +63,7 @@ const webhook = async () => {
   scriptTitle('Webhook Test')
 
   await startServer()
-  // await connectWebHook('themes/update')
+  await connectWebHook('themes/update')
 
   const connectedWebhooks = await getConnectedWebhooks()
   console.log(connectedWebhooks)
